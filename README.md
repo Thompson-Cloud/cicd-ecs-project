@@ -133,11 +133,9 @@ Congratulations Thompson! Your CI/CD pipeline is running successfully on AWS ECS
 
 ## Documentation
 
-Detailed project documentation including setup steps, screenshots, troubleshooting, and deployment verification is available here:
+Detailed project documentation including setup steps, screenshots, troubleshooting, and deployment verification is available below:
 
-```bash
-documentation/cicd-pipeline-project-documentation.pdf
-```
+📄 [View Project Documentation (PDF)](documentation/cicd-pipeline-project-documentation.pdf)
 
 ---
 

@@ -1,8 +1,8 @@
 # CI/CD Pipeline with GitHub Actions, Docker, Terraform, and AWS ECS
 
-This project demonstrates a complete CI/CD pipeline for containerized application deployment using GitHub Actions, Docker, Terraform, Amazon ECR, and Amazon ECS (Fargate).
+This project demonstrates an end-to-end CI/CD pipeline for deploying a containerized Flask application to AWS using GitHub Actions, Docker, Terraform, Amazon ECR, and Amazon ECS (Fargate).
 
-The pipeline automates the process of building, tagging, pushing, and deploying application updates to AWS ECS whenever changes are pushed to the `main` branch.
+The pipeline automatically builds, tags, pushes, and deploys application updates whenever code is pushed to the `main` branch.
 
 ---
 
@@ -11,7 +11,7 @@ The pipeline automates the process of building, tagging, pushing, and deploying 
 This project covers:
 
 - Application development using Python Flask
-- Containerization with Docker
+- Containerization using Docker
 - Infrastructure provisioning with Terraform
 - Image storage with Amazon ECR
 - Container orchestration with Amazon ECS (Fargate)
@@ -22,16 +22,12 @@ This project covers:
 
 ## Architecture
 
-The architecture diagram is available in:
+![AWS ECS CI/CD Architecture](architecture/aws-ecs-cicd-architecture.png)
 
-```bash
-architecture/aws-ecs-cicd-architecture.png
-```
-
-High-level flow:
+### High-Level Flow
 
 ```text
-Developer → GitHub → GitHub Actions → Amazon ECR → Amazon ECS → ALB → End Users
+Developer → GitHub → GitHub Actions → Amazon ECR → Amazon ECS → Application Load Balancer → End Users
 ```
 
 ---
@@ -42,7 +38,13 @@ Developer → GitHub → GitHub Actions → Amazon ECR → Amazon ECS → ALB �
 cicd-ecs-project/
 │
 ├── .github/
+│   └── workflows/
+│       └── deploy.yml
+│
 ├── app/
+│   ├── app.py
+│   └── requirements.txt
+│
 ├── architecture/
 │   └── aws-ecs-cicd-architecture.png
 │
@@ -50,6 +52,11 @@ cicd-ecs-project/
 │   └── cicd-pipeline-project-documentation.pdf
 │
 ├── infra/
+│   ├── main.tf
+│   ├── provider.tf
+│   ├── variables.tf
+│   └── outputs.tf
+│
 ├── Dockerfile
 ├── .gitignore
 └── README.md
@@ -75,15 +82,34 @@ cicd-ecs-project/
 
 The GitHub Actions pipeline performs the following steps:
 
-1. Checkout source code
-2. Configure AWS credentials
-3. Login to Amazon ECR
-4. Build Docker image
-5. Tag image using SHA + latest
-6. Push image to ECR
-7. Deploy updated image to ECS
+1. Checkout source code  
+2. Configure AWS credentials  
+3. Login to Amazon ECR  
+4. Build Docker image  
+5. Tag image using SHA + latest  
+6. Push image to Amazon ECR  
+7. Deploy updated image to Amazon ECS  
 
 The workflow is triggered automatically on every push to the `main` branch.
+
+---
+
+## Infrastructure Provisioned
+
+Terraform was used to provision the following AWS resources:
+
+- VPC
+- Public Subnet A
+- Public Subnet B
+- Internet Gateway
+- Route Table
+- Security Groups
+- Application Load Balancer
+- Target Group
+- Amazon ECR Repository
+- Amazon ECS Cluster
+- Amazon ECS Service
+- ECS Task Definition
 
 ---
 
@@ -105,28 +131,9 @@ Congratulations Thompson! Your CI/CD pipeline is running successfully on AWS ECS
 
 ---
 
-## Infrastructure Summary
-
-Provisioned resources include:
-
-- VPC
-- Public Subnet A
-- Public Subnet B
-- Internet Gateway
-- Route Table
-- Security Groups
-- Application Load Balancer
-- Target Group
-- Amazon ECR Repository
-- Amazon ECS Cluster
-- Amazon ECS Service
-- ECS Task Definition
-
----
-
 ## Documentation
 
-Detailed project documentation including setup steps, screenshots, troubleshooting, and deployment verification is available in:
+Detailed project documentation including setup steps, screenshots, troubleshooting, and deployment verification is available here:
 
 ```bash
 documentation/cicd-pipeline-project-documentation.pdf
@@ -142,5 +149,12 @@ This project strengthened practical experience in:
 - Containerization
 - CI/CD automation
 - AWS networking
-- ECS deployment strategy
-- Troubleshooting real deployment issues
+- ECS deployment
+- Infrastructure troubleshooting
+
+---
+
+## Author
+
+**Thompson**  
+DevOps / Cloud Engineer
